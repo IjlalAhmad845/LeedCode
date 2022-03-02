@@ -6,12 +6,9 @@ public:
         
         vector<bool> result;
         
-        for(int i=0;i<n;i++)
-        {
-            if(candies[i]+extraCandies >= *max_element(candies.begin(),candies.end()))
-                result.push_back(true);
-            else result.push_back(false);
-        }
+        for(int i=0;i<n;i++)          
+            result.push_back(candies[i]+extraCandies >= *max_element(candies.begin(),candies.end()));
+        
         
         return result;
     }
