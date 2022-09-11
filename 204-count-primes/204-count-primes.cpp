@@ -1,7 +1,7 @@
 class Solution {
 public:
     int countPrimes(int n) {
-        vector<bool> sieve(n+1,true);
+        vector<bool> sieve(n,true);
         
         int count=0;
         for(int i=2;i<n;i++)
@@ -10,7 +10,6 @@ public:
             if(sieve[i])
             {
                 count++;
-                //if(i*i<n)
                 for(int j=2*i;j<n;j+=i)
                 {
                     sieve[j]=false;
