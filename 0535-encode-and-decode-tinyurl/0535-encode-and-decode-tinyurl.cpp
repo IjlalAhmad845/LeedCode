@@ -13,7 +13,6 @@ public:
 
     // Decodes a shortened URL to its original URL.
     string decode(string shortUrl) {
-        cout<<shortUrl;
         return m[shortUrl];
     }
 };
