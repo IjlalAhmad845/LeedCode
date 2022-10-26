@@ -3,9 +3,6 @@ public:
     vector<int> searchRange(vector<int>& nums, int target) {
         int n=nums.size();
         
-        if(n==0)
-            return {-1,-1};
-        
         int s=0,e=n-1;
         
         int a=-1;
