@@ -11,30 +11,68 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        vector<int> v;
+        if(k==1)
+            return head;
+        
+        auto p = reverse(head,k);
+        head = p.first;
         
         ListNode *ptr=head;
+        
+        for(int i=0;i<k-1;i++)
+            ptr=ptr->next;
+        
+
         while(ptr!=NULL)
         {
-            v.push_back(ptr->val);
+            p = reverse(p.second,k);
+            ptr->next= p.first;
+            
+            if(p.first==p.second)
+                break;
+            for(int i=0;i<k;i++)
+                ptr=ptr->next;
+        }
+        return head;
+    }
+    
+    pair<ListNode*,ListNode*> reverse(ListNode *head,int k)
+    {
+        int len=0;
+        ListNode *ptr=head;
+        
+        while(ptr!=NULL)
+        {
+            len++;
             ptr=ptr->next;
         }
         
-        for(int i=0;i<v.size()/k*k;i+=k)
+        if(len<k)
+            return {head,head};
+        
+        ListNode *prev=NULL;
+        ListNode *curr=head;
+        ListNode *next=head->next;
+ 
+        while(k!=0)
         {
-            reverse(v.begin()+i,v.begin()+i+k);
+            k--;
+            curr->next=prev;
+            prev = curr;
+            curr = next;
+            
+            if(next==NULL)
+                break;
+            next = next->next;
         }
         
-        reverse(v.begin(),v.end());
+        // ListNode *p=prev;
+        // while(p!=NULL)
+        // {
+        //     cout<<p->val<<" ";
+        //     p=p->next;
+        // }
         
-        ListNode *result=NULL;
-        for(auto i:v)
-        {
-            ListNode *p=new ListNode(i);
-            p->next=result;
-            result=p;
-        }
-        
-        return result;
+        return {prev,curr};
     }
 };
